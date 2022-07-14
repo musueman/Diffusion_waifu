@@ -16,7 +16,7 @@ diffusion = GaussianDiffusion(
 trainer = Trainer(
     diffusion,
     '../anime_face',
-    train_batch_size = 32,
+    train_batch_size = 4,
     train_lr = 8e-5,
     train_num_steps = 700000,         # total training steps
     gradient_accumulate_every = 2,    # gradient accumulation steps

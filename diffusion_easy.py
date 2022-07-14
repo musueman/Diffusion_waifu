@@ -7,7 +7,7 @@ model = Unet(
 
 diffusion = GaussianDiffusion(
     model,
-    image_size = 128,
+    image_size = 64,
     timesteps = 1000,           # number of steps
     sampling_timesteps = 250,   # number of sampling timesteps (using ddim for faster inference [see citation for ddim paper])
     loss_type = 'l1'            # L1 or L2
@@ -16,7 +16,7 @@ diffusion = GaussianDiffusion(
 trainer = Trainer(
     diffusion,
     '../anime_face',
-    train_batch_size = 4,
+    train_batch_size = 16,
     train_lr = 8e-5,
     train_num_steps = 700000,         # total training steps
     gradient_accumulate_every = 2,    # gradient accumulation steps

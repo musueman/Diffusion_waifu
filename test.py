@@ -8,6 +8,7 @@ import torch
 from torchvision.transforms import Compose, ToTensor, Lambda, CenterCrop, Resize
 from diffusion import reverse_transform,get_noisy_image
 import numpy as np
+
 def test():
     url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
     image = Image.open(requests.get(url,stream=True).raw)

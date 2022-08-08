@@ -20,6 +20,7 @@ import wandb
 from torchvision import datasets
 from dataset import MyDataset
 import os
+import tqdm
 
 wandb.init(config=DEFAULT_CONFIG,project="diffusion_anime",name="test_0",mode="disabled")
 
@@ -117,14 +118,16 @@ def transforms(examples):
 
 def train(epochs):
     for epoch in range(epochs):
-        for step,batch in enumerate(dataloader):
+        progress_bar = tqdm(enumerate(dataloader),total=len(dataloader))
+        for step,batch in progress_bar:
             optimizer.zero_grad()
             batch_size = batch.shape[0]
             batch = batch.to(device)
             t = torch.randint(0,timesteps,(batch_size,),device=device,dtype=torch.long)
             loss = p_losses(model,batch,t,loss_type="l1")
+            progress_bar.set_description(f"Epoch {epoch+1}/{epochs}")
             if step % 100 == 0:
-                print(f"Epoch {epoch}, step {step}, loss {loss.item()}")
+                progress_bar.set_postfix(f"Loss: {loss.item()}")
                 wandb.log({"loss":loss.item()})
             loss.backward()
             optimizer.step()

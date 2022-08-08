@@ -22,8 +22,12 @@ from dataset import MyDataset
 import os
 from tqdm import tqdm
 
-wandb.init(config=DEFAULT_CONFIG,project="diffusion_anime",name="test_0",mode="disabled")
-
+use_wandb = DEFAULT_CONFIG["WITH_WANDB"]
+if not use_wandb:
+    wandb.init(config=DEFAULT_CONFIG,project="diffusion_anime",name="test_0",mode="disabled")
+else:
+    wandb.init(config=DEFAULT_CONFIG,project="diffusion_anime",name="test_0")
+    
 timesteps = DEFAULT_CONFIG["TIMESTEPS"]
 betas = linear_beta_schedule(timesteps)
 alphas = 1. - betas

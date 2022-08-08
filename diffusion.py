@@ -139,6 +139,7 @@ def train(epochs):
                 milestone = step // save_and_sample_every
                 batches = num_to_groups(4,batch_size)
                 all_images_list = list(map(lambda n:sample(model,image_size,batch_size=n,channels=channels),batches))
+                print(all_images_list)
                 all_images = torch.cat(all_images_list,dim=0)
                 all_images = (all_images + 1) * 0.5
                 save_image(all_images,f"{results_folder}/sample-{milestone}.png",nrow=6)

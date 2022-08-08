@@ -20,7 +20,7 @@ import wandb
 from torchvision import datasets
 from dataset import MyDataset
 import os
-import tqdm
+from tqdm import tqdm
 
 wandb.init(config=DEFAULT_CONFIG,project="diffusion_anime",name="test_0",mode="disabled")
 

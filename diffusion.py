@@ -126,9 +126,8 @@ def train(epochs):
             t = torch.randint(0,timesteps,(batch_size,),device=device,dtype=torch.long)
             loss = p_losses(model,batch,t,loss_type="l1")
             progress_bar.set_description(f"Epoch {epoch+1}/{epochs}")
-            if step % 100 == 0:
-                progress_bar.set_postfix(f"Loss: {loss.item()}")
-                wandb.log({"loss":loss.item()})
+            progress_bar.set_description(f"Loss: {loss.item()}")
+            wandb.log({"loss":loss.item()})
             loss.backward()
             optimizer.step()
             
